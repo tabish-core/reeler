@@ -4,6 +4,8 @@ import Header from "@/app/components/Header";
 import VideoPlayer from "@/app/components/VideoPlayer";
 import { notFound } from "next/navigation";
 
+export const revalidate = 10;
+
 async function getVideo(id: string): Promise<IVideo | null> {
     try {
         await connectToDatabase();
