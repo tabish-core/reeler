@@ -76,15 +76,9 @@ export default function VideoUploadForm() {
       });
 
       // 3. Save purely to our DB
-      // ImageKit automatically gives a url. We can generate a thumbnail URL structurally depending on IK settings,
-      // or we just save the imagekit url and generate transformations on the fly.
-      // But our db model requires `videoUrl` and `thumbnailUrl`.
-
-      // ImageKit thumbnail logic (append /ik-thumbnail.jpg)
-      const videoUrl = uploadResponse.url;
-      // Generate a thumbnail URL by appending '/ik-thumbnail.jpg' depending on ImageKit's docs.
-      // Commonly, a raw transformed URL looks like: videoUrl + "/ik-thumbnail.jpg"
-      const thumbnailUrl = uploadResponse.url + "/ik-thumbnail.jpg";
+      // We save the filePath instead of the full URL so that IKVideo can correctly apply transformations using the 'path' prop.
+      const videoUrl = uploadResponse.filePath;
+      const thumbnailUrl = uploadResponse.thumbnailUrl || (uploadResponse.filePath + "/ik-thumbnail.jpg");
 
       const payload = {
         title,
