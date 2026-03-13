@@ -3,6 +3,8 @@ import Video, { IVideo } from "@/models/Video";
 import Header from "./components/Header";
 import VideoFeed from "./components/VideoFeed";
 
+export const revalidate = 10;
+
 async function getVideos(): Promise<IVideo[]> {
   try {
     await connectToDatabase();
