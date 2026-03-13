@@ -16,6 +16,10 @@ export default function VideoComponent({ video }: { video: IVideo }) {
                 urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
                 transformation={[{ height: "720", width: "1280" }]}
                 controls={video.controls}
+                autoPlay
+                muted
+                loop
+                playsInline
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             ) : (
@@ -24,6 +28,10 @@ export default function VideoComponent({ video }: { video: IVideo }) {
                 urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
                 transformation={[{ height: "720", width: "1280" }]}
                 controls={video.controls}
+                autoPlay
+                muted
+                loop
+                playsInline
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             )}
