@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
         await User.create({
             email,
-            password
+            password: password.toString(), // The model middleware should handle this, let me check the model.
         })
 
         return NextResponse.json(

@@ -6,20 +6,24 @@ export default withAuth(
     return NextResponse.next();
   },
   {
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
       authorized({ req, token }) {
         const { pathname } = req.nextUrl;
+
+        // Allow these paths without authentication
         if (
           pathname.startsWith("/api/auth") ||
           pathname === "/login" ||
-          pathname === "/register"
-        )
-          return true;
-
-        if (pathname === "/" || pathname.startsWith("/api/videos")) {
+          pathname === "/register" ||
+          pathname === "/" ||
+          pathname.startsWith("/videos") ||
+          pathname.startsWith("/api/videos")
+        ) {
           return true;
         }
 
+        // Require authentication for all other protected paths (like /upload)
         return !!token;
       },
     },
