@@ -23,7 +23,8 @@ export default async function Home() {
     <div>
       <Header />
       <main className="page-content">
-        <h1 className="page-heading">Latest Videos</h1>
+        <h1 >Made with ❤️ by Tabish.</h1>
+        <br />
         <VideoFeed videos={videos} />
       </main>
     </div>
