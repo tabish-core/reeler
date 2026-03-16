@@ -14,6 +14,7 @@ export default function VideoComponent({ video }: { video: IVideo }) {
               <IKVideo
                 src={video.videoUrl}
                 urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+                transformation={[{ height: "720", width: "1280" }]}
                 controls={video.controls}
                 autoPlay
                 muted
@@ -25,6 +26,7 @@ export default function VideoComponent({ video }: { video: IVideo }) {
               <IKVideo
                 path={video.videoUrl}
                 urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+                transformation={[{ height: "720", width: "1280" }]}
                 controls={video.controls}
                 autoPlay
                 muted
