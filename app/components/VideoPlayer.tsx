@@ -14,6 +14,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                 <IKVideo
                     src={video.videoUrl}
                     urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+                    transformation={[{ height: "1080", width: "1920" }]}
                     controls={video.controls}
                     style={{ width: "100%", height: "100%", display: "block" }}
                 />
@@ -21,6 +22,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
                 <IKVideo
                     path={video.videoUrl}
                     urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+                    transformation={[{ height: "1080", width: "1920" }]}
                     controls={video.controls}
                     style={{ width: "100%", height: "100%", display: "block" }}
                 />
