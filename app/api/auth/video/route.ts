@@ -4,24 +4,30 @@ import Video, { IVideo } from "@/models/Video";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     try {
+        const { searchParams } = new URL(request.url);
+        const page = parseInt(searchParams.get("page") || "1", 10);
+        const limit = parseInt(searchParams.get("limit") || "12", 10);
+        const skip = (page - 1) * limit;
+
         await connectToDatabase();
-        const videos = await Video.find({}).sort({ createdAt: -1 }).lean();
+        const videos = await Video.find({})
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+            .lean();
 
-        if(!videos || videos.length === 0) {
-            return NextResponse.json([], { status: 200 });
+        const total = await Video.countDocuments();
+        const hasMore = skip + videos.length < total;
+
+        return NextResponse.json({ videos, hasMore, total });
     }
-
-    return NextResponse.json(videos)
- }
      catch (error) {
-    return NextResponse.json(
-        {error: "Failed to fetch Videos"},
-        {status: 500},
-        
-    )
-         
+        return NextResponse.json(
+            {error: "Failed to fetch Videos"},
+            {status: 500},
+        )
     }
 }
 
